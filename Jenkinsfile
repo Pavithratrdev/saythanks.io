@@ -7,13 +7,16 @@ pipeline {
                 echo 'Package directory'
                 sh("""
                     cd $WORKSPACE
-                    tar cvf saythanks.io.tar *
+                    zip -r saythanks *
                 """)
             }
         }
         stage('Deploy in Test Server') {
             steps {
                 echo 'Deploy package in Test server '
+                sh("""
+                    ./deploy_script.sh
+                """)
             }
         }
         stage('Run Automation tests') {
